@@ -19,16 +19,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/login',[LoginController::class,'index'])->name('login');
-Route::post('/login',[LoginController::class,'authenticate']);
-Route::group(['middleware' => 'auth'],function(){
-    Route::get('dashboard',[DashboardController::class,'index']);
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
-    Route::prefix('user')->group(function(){
-        Route::get('/',[UserController::class,'index'])->name('user.index');
-        Route::get('/detail/{id}',[UserController::class,'show']);
-        Route::get('/json-dt',[UserController::class,'jsonDT']);
-        Route::post('/save',[UserController::class,'store']);
-        Route::delete('/delete/{user}',[UserController::class,'destroy']);
+    Route::prefix('user')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('user.index');
+        Route::get('/detail/{id}', [UserController::class, 'show']);
+        Route::get('/json-dt', [UserController::class, 'jsonDT']);
+        Route::post('/save', [UserController::class, 'store']);
+        Route::delete('/delete/{user}', [UserController::class, 'destroy']);
     });
 });
